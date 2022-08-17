@@ -1,6 +1,6 @@
 use bevy::prelude::Component;
 
-pub const STAGE_BOTTOM: f32 = -256.;
+pub const STAGE_BOTTOM: f32 = 48.;
 pub const ACCELERATION_SECOND: f32 = 128.;
 pub const TERMINAL_VELOCITY: f32 = 256.;
 
