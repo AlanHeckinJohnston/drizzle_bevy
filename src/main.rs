@@ -1,5 +1,5 @@
-use bevy::{prelude::{App, Res, AssetServer, Commands, Camera2dBundle, default, Transform, Vec3, ClearColor, Color, ResMut, Handle, Image}, DefaultPlugins, sprite::{SpriteBundle}, window::{WindowDescriptor, PresentMode}, render::{camera::ScalingMode}};
-use components::block::Block;
+use bevy::{prelude::{App, Res, AssetServer, Commands, Camera2dBundle, default, ClearColor, Color, ResMut, Handle, Image}, DefaultPlugins, window::{WindowDescriptor, PresentMode}, render::{camera::ScalingMode}, time::Timer};
+use systems::spawn_system::{SpawnTimer, spawn_block};
 use crate::systems::move_block_system::move_block_system;
 use crate::resources::sprites::Sprites;
 
@@ -22,6 +22,8 @@ fn main() {
         present_mode: PresentMode::Fifo,
         ..default()
     })
+    .insert_resource(SpawnTimer(Timer::from_seconds(2.0, true)))
+    .add_system(spawn_block)
     .add_plugins(DefaultPlugins)
     .run();
 }
@@ -47,18 +49,4 @@ fn setup<'a>(mut commands: Commands, asset_server: Res<AssetServer>, mut sprites
     sprites.insert(file_name, texture);
 
 
-}
-
-#[allow(dead_code)]
-fn setup_test_block(mut commands: Commands, asset_server: Res<AssetServer>) {
-    let mut transform = Transform::default();
-    transform.translation.x = 100.;
-    transform.translation.y = 580.;
-    transform.scale = Vec3 {x: 1.0, y: 1.0, z: 1.0};
-    commands.spawn_bundle(SpriteBundle {
-        
-        texture: asset_server.load("sprite.png"),
-        transform,
-        ..default()
-    }).insert(Block::new('a'));
 }
