@@ -11,9 +11,11 @@ pub fn move_block_system(mut query: Query<(&mut Transform, &mut Block)>, time: R
 
     let delta = time.delta_seconds();
     for (mut transform, mut block) in &mut query {
-        if transform.translation.y <= STAGE_BOTTOM {
+
+        let bottom = STAGE_BOTTOM + (block.floor * 32) as f32;
+        if transform.translation.y <= bottom {
             block.velocity = 0.;
-            transform.translation.y = STAGE_BOTTOM;
+            transform.translation.y = bottom as f32;
         }
         else {
             block.velocity += delta * ACCELERATION_SECOND;
