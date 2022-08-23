@@ -3,7 +3,6 @@ use bevy::prelude::Entity;
 
 pub struct Grid{
     columns: Vec<Vec<Entity>>,
-    shaded: Vec<Entity>
 }
 
 impl Grid {
@@ -24,7 +23,6 @@ impl Grid {
 
         Grid { 
             columns,
-            shaded: Vec::new()
         }
     }
 
