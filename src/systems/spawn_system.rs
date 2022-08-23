@@ -1,5 +1,5 @@
 use bevy::{prelude::{Commands, Res, Transform, ResMut}, time::{Time, Timer}, utils::default, sprite::SpriteBundle};
-use crate::{components::{block::Block}, resources::{sprites::Sprites, grid::Grid, dict::Dict}};
+use crate::{components::{block::Block, letter::Letter}, resources::{sprites::Sprites, grid::Grid, dict::Dict}};
 use rand::{thread_rng, Rng};
 
 
@@ -25,14 +25,17 @@ pub fn spawn_block(mut commands: Commands, time: Res<Time>, mut timer: ResMut<Sp
             ..default()
         };
 
-        let insertion = commands.spawn_bundle(SpriteBundle {
-            
-            texture: sprites.get("image.png".to_string()).unwrap().to_owned(),
+
+        let entity = commands.spawn_bundle(SpriteBundle {
+            texture: sprites.get(String::from(letter)).unwrap().to_owned(),
             transform,
             ..default()
-        }).insert(Block::new(letter, grid.get_column_size(column-1)))
-        .id().id();
+        }).insert(Block::new(grid.get_column_size(column-1)))
+        .insert(Letter {letter})
+        .id();
 
-        grid.add_to_column((column-1) as i8, insertion);
+        
+
+        grid.add_to_column((column-1) as i8, entity);
     }
 }

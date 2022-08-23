@@ -8,22 +8,22 @@ pub const TERMINAL_VELOCITY: f32 = 256.;
 
 #[derive(Component)]
 pub struct Block {
-    pub letter: char,
     pub is_bottom: bool,
     pub progress: f32,
     pub velocity: f32,
-    pub floor: i32
+    pub floor: i32,
+    pub used: bool
 }
 
 impl Block {
-    pub fn new(letter: char, floor: i32) -> Block
+    pub fn new(floor: i32) -> Block
     {
         Block {
-            letter,
             is_bottom: false,
             progress: 0.,
             velocity: 0.,
-            floor
+            floor,
+            used: false
         }
     }
 }
