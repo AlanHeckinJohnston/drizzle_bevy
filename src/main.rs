@@ -1,3 +1,5 @@
+#![windows_subsystem = "windows"]
+
 use bevy::{prelude::{App, Res, AssetServer, Commands, Camera2dBundle, default, ClearColor, Color, ResMut, Handle, Image, Vec3, OrthographicProjection, Transform}, DefaultPlugins, window::{WindowDescriptor, PresentMode}, render::{camera::ScalingMode}, time::Timer};
 use resources::{grid::Grid, current_word::Word};
 use systems::{spawn_system::{SpawnTimer, spawn_block}, init_dictionary::init_dictionary, mouse_input_system::mouse_input_system, draw_hand::{draw_hand, ChangeHandEvent}, draw_shade::show_select, make_word::{MakeWordEvent, make_word}};
