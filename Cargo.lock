@@ -1279,9 +1279,10 @@ checksum = "9ea835d29036a4087793836fa931b08837ad5e957da9e23886b29586fb9b6650"
 
 [[package]]
 name = "drizzle_bevy"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "bevy",
+ "property_parser",
  "queue",
  "rand",
 ]
@@ -2430,6 +2431,10 @@ name = "profiling"
 version = "1.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2f61dcf0b917cd75d4521d7343d1ffff3d1583054133c9b5cbea3375c703c40d"
+
+[[package]]
+name = "property_parser"
+version = "0.1.0"
 
 [[package]]
 name = "queue"
