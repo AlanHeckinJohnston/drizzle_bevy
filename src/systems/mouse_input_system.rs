@@ -1,8 +1,8 @@
 use bevy::{prelude::{Res, Input, MouseButton, ResMut, Query, EventWriter}, window::Windows};
 
-use crate::{resources::{current_word::Word, grid::Grid}, components::{letter::Letter, block::Block}};
+use crate::{resources::{current_word::Word, grid::Grid, dict::Dict}, components::{letter::Letter, block::Block}};
 
-use super::draw_hand::ChangeHandEvent;
+use super::{draw_hand::ChangeHandEvent, make_word::MakeWordEvent};
 
 
 
@@ -14,7 +14,10 @@ pub fn mouse_input_system(
     mut query: Query<(&mut Block, &Letter)>, 
     mut word: ResMut<Word>, 
     grid: Res<Grid>,
-    mut event: EventWriter<ChangeHandEvent>) {
+    dict: Res<Dict>,
+    mut change_hand_event: EventWriter<ChangeHandEvent>,
+    mut make_word_event: EventWriter<MakeWordEvent>
+) {
 
     if buttons.just_pressed(MouseButton::Left) {
         let window = windows.get_primary().unwrap();
@@ -37,7 +40,18 @@ pub fn mouse_input_system(
                             let letter = letter.letter;
                             word.word.push(letter);
                             let send = ChangeHandEvent{};
-                            event.send(send);
+                            change_hand_event.send(send);
+                        }
+                        else {
+                            if dict.is_word(&word.word) {
+                                let send: MakeWordEvent = MakeWordEvent{};
+                                make_word_event.send(send);
+                                println!("is a word - sending event");
+
+                                let send = ChangeHandEvent{};
+                                change_hand_event.send(send);
+                                word.word = String::from("");
+                            }
                         }
                     },
                     None => ()
@@ -50,7 +64,7 @@ pub fn mouse_input_system(
     else if buttons.just_pressed(MouseButton::Right) {
         word.word = "".to_owned();
         let send = ChangeHandEvent{};
-        event.send(send);
+        change_hand_event.send(send);
 
         for (mut block, _) in query.iter_mut() {
             block.used = false;

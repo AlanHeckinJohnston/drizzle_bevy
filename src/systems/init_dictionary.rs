@@ -24,6 +24,10 @@ pub fn init_dictionary(mut commands: Commands) {
 
 
     for i in word_split {
+
+        if i.to_string().len() < 3 {
+            continue;
+        }
         words.insert(i.to_string());
 
         let letters_used = count_letters(i);

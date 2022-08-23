@@ -12,18 +12,20 @@ pub struct Block {
     pub progress: f32,
     pub velocity: f32,
     pub floor: i32,
-    pub used: bool
+    pub used: bool,
+    pub column: i8
 }
 
 impl Block {
-    pub fn new(floor: i32) -> Block
+    pub fn new(floor: i32, column: i8) -> Block
     {
         Block {
             is_bottom: false,
             progress: 0.,
             velocity: 0.,
             floor,
-            used: false
+            used: false,
+            column
         }
     }
 }

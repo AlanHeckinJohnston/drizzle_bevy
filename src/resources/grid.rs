@@ -41,7 +41,21 @@ impl Grid {
         self.columns[column_number as usize].push(insertion);
     }
 
-    pub fn remove_from_column(&mut self, column_number: i8) { 
+    pub fn remove_from_column(&mut self, entity: Entity){
 
+        for columns in self.columns.iter_mut() {
+            let mut remove: Vec<usize> = Vec::new();
+
+            for (j, cells) in columns.iter_mut().enumerate() {
+
+                if cells.id() == entity.id() {
+                    remove.push(j);
+                }
+            }
+
+            for to_remove in remove {
+                columns.remove(to_remove);
+            }
+        }
     }
 }

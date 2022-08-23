@@ -4,3 +4,4 @@ pub mod init_dictionary;
 pub mod mouse_input_system;
 pub mod draw_hand;
 pub mod draw_shade;
+pub mod make_word;

@@ -29,7 +29,7 @@ impl Dict {
         }
     }
 
-    pub fn is_word(&self, word: String) -> bool {
-        self.words.contains(&word)
+    pub fn is_word(&self, word: &String) -> bool {
+        self.words.contains(word)
     }
 }

@@ -1,6 +1,6 @@
 use bevy::{prelude::{App, Res, AssetServer, Commands, Camera2dBundle, default, ClearColor, Color, ResMut, Handle, Image, Vec3, OrthographicProjection, Transform}, DefaultPlugins, window::{WindowDescriptor, PresentMode}, render::{camera::ScalingMode}, time::Timer};
 use resources::{grid::Grid, current_word::Word};
-use systems::{spawn_system::{SpawnTimer, spawn_block}, init_dictionary::init_dictionary, mouse_input_system::mouse_input_system, draw_hand::{draw_hand, ChangeHandEvent}, draw_shade::show_select};
+use systems::{spawn_system::{SpawnTimer, spawn_block}, init_dictionary::init_dictionary, mouse_input_system::mouse_input_system, draw_hand::{draw_hand, ChangeHandEvent}, draw_shade::show_select, make_word::{MakeWordEvent, make_word}};
 use crate::systems::move_block_system::move_block_system;
 use crate::resources::sprites::Sprites;
 
@@ -26,13 +26,15 @@ fn main() {
     })
     .insert_resource(Word::new())
     .insert_resource(Grid::new())
-    .insert_resource(SpawnTimer(Timer::from_seconds(2.0, true)))
+    .insert_resource(SpawnTimer(Timer::from_seconds(1.1, true)))
     .add_system(spawn_block)
     .add_system(mouse_input_system)
     .add_system(draw_hand)
     .add_system(show_select)
+    .add_system(make_word)
     .add_plugins(DefaultPlugins)
     .add_event::<ChangeHandEvent>()
+    .add_event::<MakeWordEvent>()
     .run();
 }
 

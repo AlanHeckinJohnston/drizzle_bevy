@@ -30,7 +30,7 @@ pub fn spawn_block(mut commands: Commands, time: Res<Time>, mut timer: ResMut<Sp
             texture: sprites.get(String::from(letter)).unwrap().to_owned(),
             transform,
             ..default()
-        }).insert(Block::new(grid.get_column_size(column-1)))
+        }).insert(Block::new(grid.get_column_size(column-1), column as i8))
         .insert(Letter {letter})
         .id();
 
