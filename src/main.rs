@@ -20,7 +20,7 @@ fn main() {
     property_types.insert("spawn_delay".to_owned(), PropertyType::Float);
     let props: PropertyParser = PropertyParser::new(property_types);
 
-    let time = props.get_property("spawn_delay".to_owned()).unwrap().getFloatValue();
+    let time = props.get_property("spawn_delay".to_owned()).unwrap().get_float_value();
 
     App::new()
     .add_system(move_block_system)

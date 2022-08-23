@@ -70,21 +70,21 @@ impl PropertyParser {
 }
 
 impl PropertyResult {
-    pub fn getFloatValue(&self) -> f32 {
+    pub fn get_float_value(&self) -> f32 {
         match self {
             PropertyResult::Float(val) => return *val,
             _ => panic!("Accessing incorrect data type")
         }
     }
 
-    pub fn getIntValue(&self) -> i32 {
+    pub fn get_int_value(&self) -> i32 {
         match self {
             PropertyResult::Integer(val) => return *val,
             _ => panic!("Accessing incorrect data type")
         }
     }
 
-    pub fn getStringValue(&self) -> String {
+    pub fn get_string_value(&self) -> String {
         match self {
             PropertyResult::String(val) => return val.to_owned(),
             _ => panic!("Accessing incorrect data type")

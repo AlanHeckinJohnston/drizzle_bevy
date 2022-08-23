@@ -5,4 +5,3 @@ pub mod mouse_input_system;
 pub mod draw_hand;
 pub mod draw_shade;
 pub mod make_word;
-pub mod init_loop;
