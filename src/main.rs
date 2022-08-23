@@ -1,4 +1,4 @@
-// #![windows_subsystem = "windows"]
+#![windows_subsystem = "windows"]
 
 use bevy::{prelude::{App, Res, AssetServer, Commands, Camera2dBundle, default, ClearColor, Color, ResMut, Handle, Image, Vec3, OrthographicProjection, Transform}, DefaultPlugins, window::{WindowDescriptor, PresentMode}, render::{camera::ScalingMode}, time::Timer};
 use resources::{grid::Grid, current_word::Word};
