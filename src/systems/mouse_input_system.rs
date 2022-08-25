@@ -1,9 +1,13 @@
-use bevy::{prelude::{Res, Input, MouseButton, ResMut, Query, EventWriter}, window::Windows};
+use bevy::{prelude::{Res, Input, MouseButton, ResMut, Query, EventWriter, Vec2}, window::Windows};
 
 use crate::{resources::{current_word::Word, grid::Grid, dict::Dict}, components::{letter::Letter, block::Block}};
 
 use super::{draw_hand::ChangeHandEvent, make_word::MakeWordEvent};
 
+
+
+pub const WINDOW_HEIGHT: f32 = 544.;
+pub const WINDOW_WIDTH: f32 = 640.;
 
 
 
@@ -25,8 +29,11 @@ pub fn mouse_input_system(
         match window.cursor_position() {
             Some(position) => {
 
-                let column = (position.x / 64.) as i8;
-                let index: i32 = ((position.y / 64.) as i32) - 1;
+                let window_width = window.width();
+                let window_height = window.height();
+
+
+                let (column, index) = get_grid_coordinates(position, window_height, window_width);
                 
                 let entity = grid.get_at_coordinate(column, index);
 
@@ -70,4 +77,14 @@ pub fn mouse_input_system(
             block.used = false;
         }
     }
+}
+
+pub fn get_grid_coordinates(position: Vec2, window_height: f32, window_width: f32) -> (i8, i32) {
+    let multiply_factor_x = window_width / WINDOW_WIDTH;
+    let multiply_factor_y = window_height / WINDOW_HEIGHT;
+
+    let column = (position.x  / (64. * multiply_factor_x)) as i8;
+    let index: i32 = ((position.y / (64. * multiply_factor_y)) as i32) - 1;
+
+    (column, index)
 }

@@ -12,6 +12,9 @@ mod components;
 mod resources;
 
 
+use crate::systems::mouse_input_system::WINDOW_HEIGHT;
+use crate::systems::mouse_input_system::WINDOW_WIDTH;
+
 fn main() {
 
     let props: PropertyParser = PropertyParser::new("resources/settings_types.txt", &"resources/settings.txt");
@@ -26,8 +29,8 @@ fn main() {
     .insert_resource(ClearColor(Color::rgb(1.0, 1.0, 1.0)))
     .insert_resource(Sprites::default())
     .insert_resource(WindowDescriptor { 
-        width: 640.,
-        height: 544.,
+        width: WINDOW_WIDTH,
+        height: WINDOW_HEIGHT,
         title: "Drizzle".to_string(),
         present_mode: PresentMode::Fifo,
         ..default()
